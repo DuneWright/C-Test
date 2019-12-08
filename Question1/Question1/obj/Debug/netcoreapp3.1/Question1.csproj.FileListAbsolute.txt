@@ -1,0 +1,11 @@
+C:\Users\dunea\source\repos\Question1\Question1\bin\Debug\netcoreapp3.1\Question1.exe
+C:\Users\dunea\source\repos\Question1\Question1\bin\Debug\netcoreapp3.1\Question1.deps.json
+C:\Users\dunea\source\repos\Question1\Question1\bin\Debug\netcoreapp3.1\Question1.runtimeconfig.json
+C:\Users\dunea\source\repos\Question1\Question1\bin\Debug\netcoreapp3.1\Question1.runtimeconfig.dev.json
+C:\Users\dunea\source\repos\Question1\Question1\bin\Debug\netcoreapp3.1\Question1.dll
+C:\Users\dunea\source\repos\Question1\Question1\bin\Debug\netcoreapp3.1\Question1.pdb
+C:\Users\dunea\source\repos\Question1\Question1\obj\Debug\netcoreapp3.1\Question1.csprojAssemblyReference.cache
+C:\Users\dunea\source\repos\Question1\Question1\obj\Debug\netcoreapp3.1\Question1.AssemblyInfoInputs.cache
+C:\Users\dunea\source\repos\Question1\Question1\obj\Debug\netcoreapp3.1\Question1.AssemblyInfo.cs
+C:\Users\dunea\source\repos\Question1\Question1\obj\Debug\netcoreapp3.1\Question1.dll
+C:\Users\dunea\source\repos\Question1\Question1\obj\Debug\netcoreapp3.1\Question1.pdb

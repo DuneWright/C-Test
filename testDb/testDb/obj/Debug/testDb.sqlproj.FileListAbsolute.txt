@@ -1,0 +1,10 @@
+C:\Users\dunea\source\repos\testDb\testDb\bin\Debug\testDb.dacpac
+C:\Users\dunea\source\repos\testDb\testDb\bin\Debug\testDb.dll
+C:\Users\dunea\source\repos\testDb\testDb\bin\Debug\testDb.pdb
+C:\Users\dunea\source\repos\testDb\testDb\obj\Debug\testDb.sqlprojAssemblyReference.cache
+C:\Users\dunea\source\repos\testDb\testDb\obj\Debug\Model.xml
+C:\Users\dunea\source\repos\testDb\testDb\obj\Debug\refactor.xml
+C:\Users\dunea\source\repos\testDb\testDb\obj\Debug\postdeploy.sql
+C:\Users\dunea\source\repos\testDb\testDb\obj\Debug\predeploy.sql
+C:\Users\dunea\source\repos\testDb\testDb\obj\Debug\testDb.dll
+C:\Users\dunea\source\repos\testDb\testDb\obj\Debug\testDb.pdb
