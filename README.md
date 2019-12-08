@@ -1,0 +1,2 @@
+# NewsClipCodeTest
+ C#Test
