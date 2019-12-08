@@ -49,12 +49,96 @@ namespace Question2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dunea\source\repos\Question2\Question2\testDb.mdf;Integrated Security=True;Connect Timeout=30";
 
+            using (SqlConnection cnn = new SqlConnection(connString))
+            {
+
+                cnn.Open();
+
+                String Username, FullName, Branch, Shift;
+                int BranchId, ShiftId;
+
+                DataRowView rowselected = UserGrid.SelectedItem as DataRowView;
+                if (rowselected != null)
+                {
+                   
+                    Username = rowselected["Username"].ToString();
+                    FullName = rowselected["Fullname"].ToString();
+                    Branch = rowselected["BranchDesc"].ToString();
+                    Shift = rowselected["ShiftDesc"].ToString();
+
+                }
+                else
+                {
+                    Username = null;
+                    FullName = null;
+                    Branch = null;
+                    Shift = null;
+                }
+                using (SqlCommand GetBCommand = new SqlCommand("GetBranchId", cnn))
+                {
+                    GetBCommand.CommandType = CommandType.StoredProcedure;
+                    SqlParameter param1 = new SqlParameter("@BrancDesc", SqlDbType.VarChar, 50);
+                    param1.Value = Branch;
+                    GetBCommand.Parameters.Add(param1);
+                    SqlParameter returnValue = GetBCommand.Parameters.Add("@result", SqlDbType.Int);
+                    GetBCommand.Parameters["@result"].Direction = ParameterDirection.ReturnValue;
+                    GetBCommand.ExecuteNonQuery();
+                    BranchId = (int)returnValue.Value;
+                    MessageBox.Show(BranchId.ToString());
+
+                }
+                using (SqlCommand GetSCommand = new SqlCommand("GetShiftId", cnn))
+                {
+                    GetSCommand.CommandType = CommandType.StoredProcedure;
+                    SqlParameter param4 = new SqlParameter("@Shiftdesc", SqlDbType.VarChar, 50);
+                    param4.Value = Shift;
+                    GetSCommand.Parameters.Add(param4);
+                    SqlParameter returnValue = GetSCommand.Parameters.Add("@result", SqlDbType.Int);
+                    GetSCommand.Parameters["@result"].Direction = ParameterDirection.ReturnValue;
+                    GetSCommand.ExecuteNonQuery();
+                    ShiftId = (int)returnValue.Value;
+                    MessageBox.Show(BranchId.ToString());
+                    GetSCommand.ExecuteNonQuery();
+                    
+
+                }
+
+                using (SqlCommand InsertCommand = new SqlCommand("InserUser", cnn))
+                {
+
+                    InsertCommand.CommandType = CommandType.StoredProcedure;
+                    SqlParameter param1 = new SqlParameter("@UserName", SqlDbType.VarChar,50);
+                    param1.Value = Username;
+                    InsertCommand.Parameters.Add(param1);
+                    SqlParameter param2 = new SqlParameter("@FullName", SqlDbType.VarChar, 50);
+                    param2.Value = FullName;
+                    InsertCommand.Parameters.Add(param2);
+                    SqlParameter param3 = new SqlParameter("@BranchId", SqlDbType.Int);
+                    param3.Value = BranchId;
+                    InsertCommand.Parameters.Add(param3);
+                    SqlParameter param4 = new SqlParameter("@ShiftId", SqlDbType.Int);
+                    param4.Value = ShiftId;
+                    InsertCommand.Parameters.Add(param4);
+                    InsertCommand.ExecuteNonQuery();
+
+
+                }
+
+                cnn.Close();
+
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-           
+            string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dunea\source\repos\Question2\Question2\testDb.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection cnn = new SqlConnection(connString))
+            {
+
+            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
