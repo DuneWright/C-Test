@@ -9,17 +9,17 @@ Progress:
 Question 1 
 	Complete
 
-Question 2
+Question 2 - Make sure ConnetionString Is Changed to the correct source
 	Main Screen -Complete
 	
-	Users Screen
-		Struggling with Add and Update
+	Users Screen -Complete
+		
 		
 	Branches Screen -Complete
 
 	Shifts Screen -Complete
 
-	Over all - Missing alot of validation on all components
+	
 
 Question 3
 	Complete
