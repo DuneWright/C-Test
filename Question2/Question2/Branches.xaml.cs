@@ -22,7 +22,8 @@ namespace Question2
     /// </summary>
     public partial class Branches : Page
     {
-        
+        public String connetionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dunea\source\repos\Question2\Question2\testDb.mdf;Integrated Security=True;Connect Timeout=30";
+
         public Branches()
         {
             InitializeComponent();
@@ -30,9 +31,7 @@ namespace Question2
 
         private void Branchpage_loaded(object sender, RoutedEventArgs e)
         {
-            string connetionString;
             SqlConnection cnn;
-            connetionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dunea\source\repos\Question2\Question2\testDb.mdf;Integrated Security=True;Connect Timeout=30";
             cnn = new SqlConnection(connetionString);
             
             
@@ -51,61 +50,97 @@ namespace Question2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dunea\source\repos\Question2\Question2\testDb.mdf;Integrated Security=True;Connect Timeout=30";
-
-            using (SqlConnection cnn = new SqlConnection(connString))
+            DataRowView rowselected = BranchGrid.SelectedItem as DataRowView;
+            if (rowselected != null)
             {
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = new SqlCommand("selectBranch", cnn);
-                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
-                cnn.Open();
+              String  BranchDesct = rowselected["BranchDesc"].ToString();
+                if (BranchDesct != "")
+                {
 
-                DataTable dataTable = new DataTable();
-                adapter.Fill(dataTable);
+                    using (SqlConnection cnn = new SqlConnection(connetionString))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        adapter.SelectCommand = new SqlCommand("selectBranch", cnn);
+                        adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                        SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+                        cnn.Open();
 
-                adapter.Update(((DataView)BranchGrid.ItemsSource).Table);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
 
-                BranchGrid.ItemsSource = null;
-                dataTable.Clear();
-                adapter.Fill(dataTable);
-                adapter.Update(dataTable);
-                BranchGrid.ItemsSource = dataTable.DefaultView;
-                
-                cnn.Close();
+                        adapter.Update(((DataView)BranchGrid.ItemsSource).Table);
+
+                        BranchGrid.ItemsSource = null;
+                        dataTable.Clear();
+                        adapter.Fill(dataTable);
+                        adapter.Update(dataTable);
+                        BranchGrid.ItemsSource = dataTable.DefaultView;
+                        MessageBox.Show("New Entry Added","Success");
+                        cnn.Close();
 
 
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a Branch Description", "No Value");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please Add an item", "Nothing to add");
             }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dunea\source\repos\Question2\Question2\testDb.mdf;Integrated Security=True;Connect Timeout=30";
 
-            using (SqlConnection cnn = new SqlConnection(connString))
+            DataRowView rowselected = BranchGrid.SelectedItem as DataRowView;
+            if (rowselected != null)
             {
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = new SqlCommand("selectBranch", cnn);
-                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
-                cnn.Open();
+                String BranchDesct = rowselected["BranchDesc"].ToString();
+                if (BranchDesct != "")
+                {
 
-                DataTable dataTable = new DataTable();
-                adapter.Fill(dataTable);
+                    using (SqlConnection cnn = new SqlConnection(connetionString))
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        adapter.SelectCommand = new SqlCommand("selectBranch", cnn);
+                        adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                        SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+                        cnn.Open();
 
-                
-                
-                adapter.Update(((DataView)BranchGrid.ItemsSource).Table);
-              
-               
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        adapter.Update(((DataView)BranchGrid.ItemsSource).Table);
+
+                        BranchGrid.ItemsSource = null;
+                        dataTable.Clear();
+                        adapter.Fill(dataTable);
+                        adapter.Update(dataTable);
+                        BranchGrid.ItemsSource = dataTable.DefaultView;
+                        MessageBox.Show("Branch Edited", "Success");
+                        cnn.Close();
+
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a Branch Description", "No Value");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please Edit an item", "Nothing selected");
             }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dunea\source\repos\Question2\Question2\testDb.mdf;Integrated Security=True;Connect Timeout=30";
 
-            using (SqlConnection cnn = new SqlConnection(connString))
+            using (SqlConnection cnn = new SqlConnection(connetionString))
             {
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = new SqlCommand("selectBranch", cnn);

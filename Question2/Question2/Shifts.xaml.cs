@@ -22,6 +22,8 @@ namespace Question2
     /// </summary>
     public partial class Shifts : Page
     {
+        public String connetionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dunea\source\repos\Question2\Question2\testDb.mdf;Integrated Security=True;Connect Timeout=30";
+
         public Shifts()
         {
             InitializeComponent();
@@ -29,9 +31,7 @@ namespace Question2
 
         private void Shiftpage_Loaded(object sender, RoutedEventArgs e)
         {
-        string connetionString;
         SqlConnection cnn;
-        connetionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dunea\source\repos\Question2\Question2\testDb.mdf;Integrated Security=True;Connect Timeout=30";
         cnn = new SqlConnection(connetionString);
         cnn.Open();
         //MessageBox.Show("Connection Open  !");
@@ -49,9 +49,13 @@ namespace Question2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dunea\source\repos\Question2\Question2\testDb.mdf;Integrated Security=True;Connect Timeout=30";
-
-            using (SqlConnection cnn = new SqlConnection(connString))
+            DataRowView rowselected = ShiftGrid.SelectedItem as DataRowView;
+            if (rowselected != null)
+            {
+                String ShiftDesct = rowselected["ShiftDesc"].ToString();
+                if (ShiftDesct != "")
+                {
+                    using (SqlConnection cnn = new SqlConnection(connetionString))
             {
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = new SqlCommand("selectShift", cnn);
@@ -69,18 +73,33 @@ namespace Question2
                 adapter.Fill(dataTable);
                 adapter.Update(dataTable);
                 ShiftGrid.ItemsSource = dataTable.DefaultView;
+                        MessageBox.Show("New Entry Added", "Success");
 
-                cnn.Close();
+                        cnn.Close();
 
 
+            }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a Shift Description", "No Value");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please Add an item", "Nothing to add");
             }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dunea\source\repos\Question2\Question2\testDb.mdf;Integrated Security=True;Connect Timeout=30";
-
-            using (SqlConnection cnn = new SqlConnection(connString))
+            DataRowView rowselected = ShiftGrid.SelectedItem as DataRowView;
+            if (rowselected != null)
+            {
+                String ShiftDesct = rowselected["ShiftDesc"].ToString();
+                if (ShiftDesct != "")
+                {
+                    using (SqlConnection cnn = new SqlConnection(connetionString))
             {
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = new SqlCommand("selectShift", cnn);
@@ -94,16 +113,27 @@ namespace Question2
 
 
                 adapter.Update(((DataView)ShiftGrid.ItemsSource).Table);
+                        MessageBox.Show("Shift Edited", "Success");
 
 
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a Shift Description", "No Value");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please Edit an item", "Nothing selected");
             }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            string connString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dunea\source\repos\Question2\Question2\testDb.mdf;Integrated Security=True;Connect Timeout=30";
 
-            using (SqlConnection cnn = new SqlConnection(connString))
+            using (SqlConnection cnn = new SqlConnection(connetionString))
             {
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = new SqlCommand("selectShift", cnn);
